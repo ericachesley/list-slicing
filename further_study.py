@@ -16,7 +16,10 @@ def custom_len(input_list):
 
     """
 
-    return 0
+    length = 0
+    for item in input_list:
+        length += 1
+    return length
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -44,7 +47,7 @@ def custom_append(input_list, value):
 
     """
 
-    pass
+    input_list[custom_len(input_list):] = [value]
 
 
 def custom_extend(input_list, second_list):
@@ -63,7 +66,8 @@ def custom_extend(input_list, second_list):
 
     """
 
-    pass
+    for item in second_list:
+        custom_append(input_list, item)
 
 
 def custom_insert(input_list, index, value):
@@ -81,7 +85,13 @@ def custom_insert(input_list, index, value):
 
     """
 
-    pass
+    new_list = input_list[:index]
+    custom_append(new_list, value)
+    custom_extend(new_list, input_list[index:])
+
+    #input_list = new_list
+    input_list[:] = []
+    custom_extend(input_list, new_list)
 
 
 def custom_remove(input_list, value):
@@ -100,7 +110,10 @@ def custom_remove(input_list, value):
 
     """
 
-    pass
+    for index in range(custom_len(input_list)):
+        if input_list[index] == value:
+            input_list[index:index+1] = []
+            return
 
 
 def custom_pop(input_list):
@@ -119,7 +132,9 @@ def custom_pop(input_list):
 
     """
 
-    return None
+    value = input_list[-1]
+    input_list[-1:] = []
+    return value
 
 
 def custom_index(input_list, value):
@@ -135,7 +150,9 @@ def custom_index(input_list, value):
 
     """
 
-    return 0
+    for index in range(custom_len(input_list)):
+        if input_list[index] == value:
+            return index
 
 
 def custom_count(input_list, value):
@@ -151,7 +168,11 @@ def custom_count(input_list, value):
 
     """
 
-    return 0
+    count = 0
+    for item in input_list:
+        if item == value:
+            count += 1
+    return count
 
 
 def custom_reverse(input_list):
@@ -170,7 +191,12 @@ def custom_reverse(input_list):
 
     """
 
-    pass
+    new_list = [input_list[-1]]
+    for index in range(2, custom_len(input_list)+1):
+        custom_append(new_list, input_list[-1*index])
+    #input_list = new_list
+    input_list[:] = []
+    custom_extend(input_list, new_list)
 
 
 def custom_contains(input_list, value):
@@ -190,7 +216,10 @@ def custom_contains(input_list, value):
 
     """
 
-    return None
+    for item in input_list:
+        if item == value:
+            return True
+    return False
 
 
 def custom_equality(some_list, another_list):
@@ -209,7 +238,14 @@ def custom_equality(some_list, another_list):
 
     """
 
-    return None
+    if custom_len(some_list) != custom_len(another_list):
+        return False
+
+    for index in range(custom_len(some_list)):
+        if some_list[index] != another_list[index]:
+            return False
+
+    return True
 
 
 # This is the part were we actually run the doctests.
