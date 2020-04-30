@@ -182,8 +182,8 @@ def delete_third_and_seventh(input_list):
 
     """
 
-    input_list.pop(2)
-    input_list.pop(5)
+    del input_list[2]
+    del input_list[5]
 
 
 def delete_middle(input_list):
